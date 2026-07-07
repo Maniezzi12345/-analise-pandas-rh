@@ -29,3 +29,19 @@ def salario_medio_por_depto(df):
 def funcionario_maior_salario(df):
     idx = df["salario"].idxmax()
     return df.loc[idx]
+
+
+# Vamos implementar uma função com funcionarios abaixo da media geral 
+
+def abaixo_da_media(df):
+    media = df["salario"].mean()
+    return df[df["salario"] < media]
+
+def ranking_salario(df):
+    return df.sort_values("salario",ascending=False)
+
+def contar_por_status(df):
+    return df.groupby("status")["nome"].count().reset_index()
+
+def top_3_salarios(df):
+    return df.sort_values("salario", ascending=False).head(3)
