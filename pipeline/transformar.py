@@ -45,3 +45,28 @@ def contar_por_status(df):
 
 def top_3_salarios(df):
     return df.sort_values("salario", ascending=False).head(3)
+
+def depto_mais_funcionarios(df):
+    grupo = df.groupby("depto")["nome"].count().reset_index()
+    grupo.columns = ["depto", "quantidade"]
+    return grupo.sort_values("quantidade", ascending=False).head(1)
+
+def funcionario_por_depto_e_status(df):
+    return df.groupby(["depto", "status"])["nome"].count().reset_index()
+
+def media_salarial_ativos_por_depto(df):
+    ativos = df[df["status"] == "ativo"]
+    resultado = ativos.groupby("depto")["salario"].mean().reset_index()
+    resultado = resultado.sort_values("salario", ascending=False)
+
+    return resultado
+
+
+# Regra de ouro
+
+# WHERE   → df[df["col"] == valor]
+# GROUP BY → .groupby("col")
+# SELECT  → ["col"]
+# AVG     → .mean()
+# ORDER BY → .sort_values("col", ascending=False)
+# LIMIT   → .head(n)

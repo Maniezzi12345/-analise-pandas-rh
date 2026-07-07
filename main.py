@@ -9,7 +9,10 @@ from pipeline.transformar import (
     abaixo_da_media,
     ranking_salario,
     contar_por_status,
-    top_3_salarios
+    top_3_salarios,
+    depto_mais_funcionarios,
+    funcionario_por_depto_e_status,
+    media_salarial_ativos_por_depto
 )
 
 # pipeline
@@ -23,6 +26,9 @@ abaixo = abaixo_da_media(ativos)
 ranking = ranking_salario (ativos)
 status = contar_por_status(df)
 top3 = top_3_salarios(df)
+deptoMaisFuncionario = depto_mais_funcionarios(df)
+funcinarioDepto = funcionario_por_depto_e_status(df)
+mediaSalarial = media_salarial_ativos_por_depto(ativos)
 # relatório
 print("=== RELATÓRIO DE FUNCIONÁRIOS ===")
 print()
@@ -50,3 +56,15 @@ print(status.to_string(index=False))
 print()
 print("=== TOP 3 SALÁRIOS ===")
 print(top3[["nome", "depto", "salario"]].to_string(index=False))
+
+print()
+print("=== DEPTO COM MAIS FUNCIONÁRIOS ===")
+print(deptoMaisFuncionario.to_string(index=False))
+
+print()
+print("=== FUNCIONÁRIOS POR DEPTO E STATUS ===")
+print(funcinarioDepto.to_string(index=False))
+
+print()
+print("=== MÉDIA SALARIAL ATIVOS POR DEPTO ===")
+print(mediaSalarial.to_string(index=False))
