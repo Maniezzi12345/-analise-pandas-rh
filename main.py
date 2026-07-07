@@ -1,20 +1,29 @@
-print("iniciando...")
 from dados.funcionarios import funcionarios
-print("dados importados")
-from pipeline.transformar import carregar_dados, filtrar_ativos, agrupar_por_depto, maior_folha
-print("funções importadas")
+from pipeline.transformar import (
+    carregar_dados,
+    filtrar_ativos,
+    agrupar_por_depto,
+    maior_folha,
+    salario_medio_por_depto,
+    funcionario_maior_salario
+)
 
+# pipeline
 df     = carregar_dados(funcionarios)
-print("df criado")
 ativos = filtrar_ativos(df)
-print("ativos filtrados")
 grupos = agrupar_por_depto(ativos)
-print("agrupado")
 maior  = maior_folha(grupos)
-print("maior calculado")
+medio  = salario_medio_por_depto(ativos)
+top    = funcionario_maior_salario(ativos)
 
+# relatório
 print("=== RELATÓRIO DE FUNCIONÁRIOS ===")
 print()
 print(grupos.to_string(index=False))
 print()
 print(maior)
+print()
+print("=== SALÁRIO MÉDIO POR DEPTO ===")
+print(medio.to_string(index=False))
+print()
+print(f"Funcionário top: {top['nome']} — R$ {top['salario']:.2f} — {top['depto']}")

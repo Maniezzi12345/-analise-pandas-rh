@@ -22,3 +22,10 @@ def maior_folha(df_agrupado):
     idx   = df_agrupado["folha"].idxmax()
     linha = df_agrupado.loc[idx]
     return f"Maior folha: {linha['depto']} — R$ {linha['folha']:.2f}"
+
+def salario_medio_por_depto(df):
+    return df.groupby("depto")["salario"].mean().reset_index()
+
+def funcionario_maior_salario(df):
+    idx = df["salario"].idxmax()
+    return df.loc[idx]
