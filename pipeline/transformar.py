@@ -62,7 +62,19 @@ def media_salarial_ativos_por_depto(df):
     return resultado
 
 
-# Regra de ouro
+def funcionarios_acima_de(df, valor):
+    return df[df["salario"] > valor].sort_values("salario", ascending=False)
+
+def resumo_geral(df):
+        return {
+            "total":       df["nome"].count(),
+            "media":       df["salario"].mean(),
+            "maior":       df["salario"].max(),
+            "menor":       df["salario"].min(),
+            "folha_total": df["salario"].sum()
+        }
+
+
 
 # WHERE   → df[df["col"] == valor]
 # GROUP BY → .groupby("col")

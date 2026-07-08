@@ -12,7 +12,9 @@ from pipeline.transformar import (
     top_3_salarios,
     depto_mais_funcionarios,
     funcionario_por_depto_e_status,
-    media_salarial_ativos_por_depto
+    media_salarial_ativos_por_depto,
+    funcionarios_acima_de,
+    resumo_geral
 )
 
 # pipeline
@@ -29,7 +31,12 @@ top3 = top_3_salarios(df)
 deptoMaisFuncionario = depto_mais_funcionarios(df)
 funcinarioDepto = funcionario_por_depto_e_status(df)
 mediaSalarial = media_salarial_ativos_por_depto(ativos)
+funcionarioAcima = funcionarios_acima_de(df,5000)
+resumo = resumo_geral(df)
+
 # relatório
+
+
 print("=== RELATÓRIO DE FUNCIONÁRIOS ===")
 print()
 print(grupos.to_string(index=False))
@@ -66,5 +73,10 @@ print("=== FUNCIONÁRIOS POR DEPTO E STATUS ===")
 print(funcinarioDepto.to_string(index=False))
 
 print()
-print("=== MÉDIA SALARIAL ATIVOS POR DEPTO ===")
-print(mediaSalarial.to_string(index=False))
+print("=== FUNCIONÁRIOS ACIMA DE R$ 5000 ===")
+print(funcionarioAcima[["nome", "depto", "salario"]].to_string(index=False))
+
+print()
+print("=== RESUMO GERAL ===")
+for chave, valor in resumo.items():
+    print(f"{chave:<12}: {valor}")
