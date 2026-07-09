@@ -82,3 +82,23 @@ def resumo_geral(df):
 # AVG     → .mean()
 # ORDER BY → .sort_values("col", ascending=False)
 # LIMIT   → .head(n)
+
+
+def filtro_duplo(df):
+    return df[
+        (df['status'] == 'ativo') &
+        (df['salario'] > 4000)
+    ]
+
+def nova_coluna_bonus(df):
+    df = df.copy()  # ← cria uma cópia para não modificar o original
+    df['bonus'] = df['salario'] * 0.10
+    return df[["nome","salario","bonus"]]
+
+
+def renomear_colunas(df):
+    return df.rename(colums={
+        "nome":    "funcionario",
+        "depto":   "departamento",
+        "salario": "remuneracao"
+    })
